@@ -1,0 +1,92 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #1c1c1c !important;
+    color: #fff !important;
+    font-family: 'Arial', sans-serif !important;
+    overflow-x: hidden !important;
+    text-align: right; 
+  }
+  
+  .home {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+  
+  }
+  
+  h1, h2, h3  {
+    margin: 0;
+    padding: 0 !important;
+    text-align: center; 
+    
+    
+  }
+  
+  p, ul {
+    margin-bottom: 20px; 
+    text-align: center; 
+  }
+  
+  /* Media Queries */
+  
+  /* Pantallas medianas (tabletas) */
+  @media (max-width: 1024px) {
+    body {
+      padding: 20px;
+    }
+  
+    h1, h2, h3 {
+      font-size: 22px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  
+    .home {
+      padding: 10px; /* Añade padding para mejor separación */
+    }
+  }
+  
+  /* Pantallas pequeñas (móviles grandes) */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+  
+    h1, h2, h3 {
+      font-size: 18px;
+    }
+  
+    p {
+      font-size: 14px;
+    }
+  
+    .home {
+      padding: 5px; /* Reduce el padding para optimizar espacio */
+    }
+  }
+  
+  /* Pantallas muy pequeñas (móviles antiguos) */
+  @media (max-width: 480px) {
+    body {
+      padding: 5px;
+    }
+  
+    h1, h2, h3 {
+      font-size: 16px;
+    }
+  
+    p, ul {
+      font-size: 12px;
+      line-height: 1.5; /* Mejora la legibilidad en pantallas pequeñas */
+    }
+  
+    .home {
+      margin: 0 auto;
+      align-items: center; /* Centra los elementos horizontalmente */
+      text-align: center;
+    }
+  }
+  
+  

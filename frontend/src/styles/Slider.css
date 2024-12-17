@@ -1,0 +1,137 @@
+.slider {
+  position: relative;
+  width: 100%;
+  height: 700px; /* Altura fija para el slider */
+  overflow: hidden; /* Evita desbordamientos */
+  margin: 0; /* Elimina márgenes adicionales */
+  padding: 0;
+}
+
+.slider img {
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Alto completo */
+  object-fit: cover; /* Cubre todo el contenedor sin dejar espacios */
+  display: block;
+}
+
+
+.slider-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(243, 243, 243, 0.5);
+  color: white;
+  border: none;
+  font-size: 30px; 
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.dots {
+  text-align: center;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+.dot {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+  margin: 0 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #92b5f7;
+}
+
+/* Media Queries */
+
+/* Pantallas medianas (máximo 1024px) */
+@media (max-width: 1024px) {
+  .slider {
+    height: auto; /* Reduce la altura del slider en pantallas pequeñas */
+    margin-top: 90px; /* Ajustar la altura para pantallas medianas */
+  }
+
+  .slider img {
+    height: auto;  /* Ajustar la imagen para pantallas medianas */
+  }
+
+  .prev, .next {
+    font-size: 25px; /* Reducir tamaño de las flechas */
+    padding: 8px;
+  }
+
+  .dots {
+    bottom: 30px; /* Ajustar la posición de los puntos */
+  }
+}
+
+/* Pantallas pequeñas (máximo 768px) */
+@media (max-width: 768px) {
+  .slider {
+    height: auto; /* Reduce la altura del slider en pantallas pequeñas */
+    margin-top: 90px;
+  }
+
+  .slider img {
+    height: auto;; /* Ajustar la imagen al tamaño reducido */
+  }
+
+  .prev, .next {
+    font-size: 20px; /* Reducir el tamaño de las flechas */
+    padding: 5px;
+  }
+
+  .dots {
+    bottom: 20px; /* Posicionar los puntos en la parte inferior */
+  }
+}
+
+/* Pantallas muy pequeñas (teléfonos antiguos, máximo 480px) */
+@media (max-width: 480px) {
+  .slider {
+    height: auto; /* Ajustar aún más la altura del slider */
+    margin-top: 90px;
+  }
+
+  .slider img {
+    height: auto; /* Ajustar la imagen para teléfonos más pequeños */
+  }
+
+  .prev, .next {
+    font-size: 18px; /* Hacer las flechas más pequeñas */
+    padding: 4px;
+  }
+
+  .dots {
+    bottom: 15px; /* Ajustar la posición de los puntos */
+  }
+}
+
+
