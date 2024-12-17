@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 
 # Create your models here.
 
@@ -21,3 +22,17 @@ class Artista(models.Model):
 
     def __str__(self):
         return self.nombre_artistico
+=======
+from genero_musical.models import GenerosMusicales
+
+class Artistas(models.Model):
+    nombre = models.CharField(max_length=100)
+    nombre_artistico = models.CharField(max_length=100)
+    biografia = models.TextField()
+    fecha_nacimiento = models.DateField()
+    generos_musicales = models.ManyToManyField(GenerosMusicales)
+    redes_sociales = models.JSONField(default=dict)
+
+    def __str__(self):
+        return self.nombre
+>>>>>>> 34475f7fd07ba1dcba06a7ba3e9370378f3e2418
