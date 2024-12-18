@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/generos/', include('generosApi.urls')),
     path('api/discos/', include('discosApi.urls')),
     path('api/canciones/', include('cancionesApi.urls')),
+    path('api/', include('usuariosApi.urls')), #Se añade la url para manejar usuarios 
 ]
