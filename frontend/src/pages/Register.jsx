@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../utils/api"; 
 import "../styles/Register.css";
@@ -11,23 +11,40 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const [csrfToken, setCsrfToken] = useState("");
+
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await api.get("/api/csrf-token/");
+        setCsrfToken(response.data.csrfToken);
+      } catch (err) {
+        console.error("Error fetching CSRF token:", err);
+      }
+    };
+  
+    fetchCsrfToken();
+  }, []);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
-
+  
     if (!email || !password) {
       setError("Por favor, completa todos los campos.");
       return;
     }
-
+  
     try {
-      const response = await api.post("api/register/", {
-        email,
-        password,
-      });
-
+      const response = await api.post(
+        "/api/register/",
+        { email, password },
+        { headers: { "X-CSRFToken": csrfToken } }
+      );
+  
       if (response.status === 201) {
         setSuccess("¡Registro exitoso! Ahora puedes iniciar sesión.");
         setEmail("");
@@ -39,7 +56,7 @@ const Register = () => {
       );
     }
   };
-
+  
   return (
     <>
      <Header />
