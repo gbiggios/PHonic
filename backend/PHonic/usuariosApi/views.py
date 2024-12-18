@@ -1,5 +1,6 @@
 import json
 from django.contrib.auth.models import User
+from django.middleware.csrf import get_token
 from django.http import JsonResponse
 
 def register(request):
@@ -14,3 +15,9 @@ def register(request):
                 return JsonResponse({"message": "Usuario registrado exitosamente"}, status=201)
             return JsonResponse({"error": "El usuario ya existe"}, status=400)
         return JsonResponse({"error": "Campos inválidos"}, status=400)
+
+
+
+def csrf_token_view(request):
+    csrf_token = get_token(request)
+    return JsonResponse({"csrfToken": csrf_token})

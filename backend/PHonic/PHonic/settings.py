@@ -136,7 +136,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+import os
+
+STATIC_URL = '/static/'
+
+# Ruta a los archivos estáticos de React
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build', 'static'),
+]
+
+# Carpeta para recolectar archivos estáticos en producción
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Directorio de plantillas de React
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'build')]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
