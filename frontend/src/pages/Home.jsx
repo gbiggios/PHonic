@@ -5,6 +5,7 @@ import Slider from "../components/Slider";
 import Footer from "../components/Footer";
 import Spinner from "../components/Spinner";
 import "../styles/Home.css";
+import Banners from "../components/Banners";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,7 @@ const Home = () => {
         <Header />
         <Slider />
         <HeroSection />
+        <Banners/>
         <Footer />
       </div>
 

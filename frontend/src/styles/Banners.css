@@ -1,0 +1,65 @@
+.banners {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 imágenes por fila */
+  gap: 0;
+}
+
+.banner-item {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 371px;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out; /* Efecto de zoom suave */
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fondo oscuro semi-transparente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Invisible inicialmente */
+  transition: opacity 0.3s ease-in-out; /* Transición suave */
+}
+
+.banner-item:hover .banner-overlay {
+  opacity: 1; /* Aparece al pasar el cursor */
+}
+
+.banner-item:hover .banner-image {
+  transform: scale(1.1); /* Zoom de la imagen */
+}
+
+.banner-name {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.banner-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.banner-icons i {
+  color: #fff;
+  font-size: 1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.banner-icons i:hover {
+  transform: scale(1.2); /* Efecto de zoom en los íconos */
+}
