@@ -1,0 +1,97 @@
+/* Contenedor principal del Hero */
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    text-align: center;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    overflow: hidden;
+    color: #ffffff;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 234, 0.3);
+  }
+  
+  /* Animación de fondo con luces */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 255, 234, 0.2), transparent);
+    animation: rotateBackground 10s linear infinite;
+    z-index: 0;
+  }
+  
+  /* Animación de rotación */
+  @keyframes rotateBackground {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Títulos principales */
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #00ffea;
+    text-shadow: 0 0 5px #00ffea, 0 0 15px #00ffea, 0 0 30px #00ffea;
+    margin-bottom: 1rem;
+    z-index: 1;
+    animation: flicker 2s infinite alternate;
+  }
+  
+  /* Animación de parpadeo neon */
+  @keyframes flicker {
+    0% {
+      opacity: 1;
+      text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
+    }
+    50% {
+      opacity: 0.8;
+      text-shadow: 0 0 15px #00ffea, 0 0 25px #00ffea;
+    }
+    100% {
+      opacity: 1;
+      text-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
+    }
+  }
+  
+  /* Párrafo descriptivo */
+  .hero p {
+    font-size: 1.5rem;
+    color: #ff00e1;
+    text-shadow: 0 0 5px #ff00e1, 0 0 15px #ff00e1;
+    z-index: 1;
+    animation: fadeIn 3s ease-in-out;
+  }
+  
+  /* Animación de entrada suave */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Efecto responsivo */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+  }
+  

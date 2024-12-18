@@ -1,7 +1,76 @@
+/* Estilo general del Footer */
 footer {
-    padding: 20px;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
+  background: linear-gradient(135deg, #000000, #1a1a1a); /* Fondo oscuro con degradado */
+  color: #00ffea; /* Color neon inicial */
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: 0 -2px 10px rgba(0, 255, 234, 0.3); /* Sombra superior */
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* Efecto del texto con sombra neon */
+footer p {
+  margin: 0;
+  color: #00ffea;
+  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea, 0 0 20px #00ffea;
+  transition: all 0.3s ease-in-out;
+  animation: flicker 2s infinite alternate; /* Animación de parpadeo */
+}
+
+/* Hover sobre el texto */
+footer p:hover {
+  color: #ff00e1; /* Cambio a magenta neon */
+  text-shadow: 0 0 8px #ff00e1, 0 0 15px #ff00e1, 0 0 30px #ff00e1;
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animación de parpadeo neon */
+@keyframes flicker {
+  0% {
+    opacity: 1;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
   }
-  
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 8px #00ffea, 0 0 15px #00ffea, 0 0 30px #00ffea;
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+  }
+}
+
+/* Animación decorativa de luces moviéndose */
+footer::before,
+footer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffea, transparent);
+  animation: moveLight 3s linear infinite;
+}
+
+footer::after {
+  top: auto;
+  bottom: 0;
+  animation-delay: 1.5s;
+}
+
+/* Animación de luces */
+@keyframes moveLight {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 100%;
+  }
+}
