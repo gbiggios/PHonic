@@ -1,0 +1,99 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+  }
+  
+  #wrap {
+    background-color: transparent; 
+  }
+  
+  #album {
+    position: absolute;
+    top: 400px;
+    left: 500px;
+    width: 400px;
+  height: 400px;
+    max-height: 75%;
+    max-width: 75vh;
+  }
+  
+  #cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/7f/9b/49/7f9b4987-8970-71ad-e754-aa976585eee7/7300340524666.jpg/316x316bb.webp');
+    background-size: 100% 100%;
+    box-shadow: 5px 0 20px 0 rgba(0, 0, 0, 0.6), inset 0 0 10px 5px rgba(255, 255, 255, 0.2),
+      inset 0 0 4px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  #vinyl {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    z-index: 0;
+    width: 95%;
+    height: 95%;
+    display: block;
+    background-image: url('https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Music-PNG/Gramophone_Vinyl_LP_Record_PNG_Transparent_Clip_Art_Image.png?m=1462983196');
+    background-size: 106% 106%;
+    background-position: center;
+    box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    animation: 5s linear spinThat infinite, 1s ease-out getOut 1s forwards;
+  }
+  
+  #vinyl::before {
+    position: absolute;
+    top: 2.5%;
+    left: 2.5%;
+    z-index: 10;
+    width: 95%;
+    height: 95%;
+    background-image: url('http://www.designresourcebox.com/ths/diverse/blacktextures/82267467.jpg');
+    background-size: 100% 100%;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    opacity: 0.3;
+    content: '';
+  }
+  
+
+  
+  @keyframes getOut {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 50%;
+    }
+  }
+  
+  @keyframes spinThat {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

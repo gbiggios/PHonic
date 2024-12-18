@@ -8,7 +8,7 @@ header {
   }
   
   header img {
-    height: 50px;
+    height: 100px;
   }
   
   header ul {
@@ -17,4 +17,84 @@ header {
     gap: 20px;
     cursor: pointer;
   }
-  
+  /* Estilos generales del Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: #000;
+  color: #fff;
+  box-shadow: 0 0 10px #00ffea; 
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Estilo del logo */
+.logo-container img {
+  height: 80px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo-container img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px #ff00e1); 
+}
+
+/* Navegación */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+header nav ul li {
+  position: relative;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #00ffea;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea; 
+}
+
+/* Efecto hover en los elementos de la lista */
+header nav ul li:hover {
+  color: #ff00e1;
+  text-shadow: 0 0 8px #ff00e1, 0 0 15px #ff00e1;
+  transform: scale(1.1); 
+}
+
+/* Animación debajo de cada li (subrayado) */
+header nav ul li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00ffea, #ff00e1);
+  transition: width 0.3s ease-in-out;
+}
+
+header nav ul li:hover::after {
+  width: 100%; /* Subrayado animado al pasar el cursor */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 10px 20px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .logo-container img {
+    height: 60px;
+  }
+}

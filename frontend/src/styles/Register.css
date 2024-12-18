@@ -1,0 +1,79 @@
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 3rem;
+    width: 90%;
+    background: #1a1a1a;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #ff00e1;
+  }
+  
+  .register-form h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff00e1;
+  }
+  
+  .register-form input,
+  .register-form button {
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  .register-form input {
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #00ffea;
+    background-color: #252525;
+    color: #00ffea; /* Letras neon */
+    font-size: 1rem;
+    transition: all 0.3s;
+    outline: none;
+  }
+  
+  .register-form input:focus {
+    box-shadow: 0 0 10px #00ffea;
+    border-color: #00ffea;
+  }
+
+  .register-form button {
+    background: linear-gradient(90deg, #ff00e1, #00ffea);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff00e1;
+    transition: all 0.3s ease;
+  }
+  
+  .register-form button:hover {
+    background: linear-gradient(90deg, #00ffea, #ff00e1);
+    box-shadow: 0 0 15px #00ffea;
+  }
+  
+  .login-link {
+    text-align: center;
+  }
+  
+  .link-neon {
+    color: #00ffea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .link-neon:hover {
+    color: #ff00e1;
+    text-shadow: 0 0 8px #ff00e1;
+  }
+  
