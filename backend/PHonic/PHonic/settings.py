@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'discosApi',
     'cancionesApi',
     'redesSocialesApi',
+    #Aplicación para manejar usuarios
+    'usuariosApi',
 ]
 
 MIDDLEWARE = [
