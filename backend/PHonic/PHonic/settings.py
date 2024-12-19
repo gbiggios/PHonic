@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'discos',
     'canciones',
     'redes_sociales',
+    'imagenes',
 
     # Aplicaciones API PHonic
     'artistasApi',
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     'redesSocialesApi',
     #Aplicación para manejar usuarios
     'usuariosApi',
+    'imagenesApi'
 ]
 
 MIDDLEWARE = [

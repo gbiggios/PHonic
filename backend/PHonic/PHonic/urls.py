@@ -26,6 +26,7 @@ urlpatterns = [
     path('api/discos/', include('discosApi.urls')),
     path('api/canciones/', include('cancionesApi.urls')),
     path('api/', include('usuariosApi.urls')),  # API endpoints
-    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),  # React Index
+    path('api/imagenes/', include('imagenesApi.urls')),
+    #re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),  # React Index
 ]
 
