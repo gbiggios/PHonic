@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import api from "../utils/api"; 
 import "../styles/Register.css";
-import Header from "../components/Header";
 import Slider from "../components/Slider";
 import Footer from "../components/Footer";
 
@@ -59,7 +58,6 @@ const Register = () => {
   
   return (
     <>
-     <Header />
       <Slider />
       <div className="register-container">
         <form onSubmit={handleSubmit} className="register-form">

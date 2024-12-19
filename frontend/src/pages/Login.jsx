@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../utils/api";
 import "../styles/Login.css";
-import Header from "../components/Header";
 import Slider from "../components/Slider";
 import Footer from "../components/Footer";
 import Spinner from "../components/Spinner";
@@ -52,7 +51,6 @@ const Login = () => {
 
   return (
     <>
-     <Header />
       <Slider />
       <div className="login-container">
         {loading && <Spinner />} 

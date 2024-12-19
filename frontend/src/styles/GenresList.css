@@ -1,0 +1,203 @@
+.genres-container {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.genres-title {
+    font-size: 2.5rem;
+    color: #00ffff;
+    text-shadow: 0 0 5px #00ffff, 0 0 15px #00cccc;
+    margin-bottom: 2rem;
+}
+
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 2rem; 
+    width: 100%;
+    max-width: 1200px;
+    margin: auto; 
+}
+
+.genre-card {
+    background: linear-gradient(135deg, #222, #111);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 2.5rem; 
+    box-shadow: 0 0 15px #00ffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    height: 350px;
+}
+
+
+.genre-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00ffff;
+}
+
+.genre-name {
+    color: #ff7cff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #f0f;
+}
+
+.genre-description {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.edit-button,
+.delete-button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.edit-button {
+    background-color: #00ffff;
+    color: #000;
+}
+
+.delete-button {
+    background-color: #ff00ff;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #00cccc;
+}
+
+.delete-button:hover {
+    background-color: #cc0099;
+}
+
+/* Estilos para el input y textarea en modo edición */
+.genre-card input,
+.genre-card textarea {
+    background: #111; 
+    border: 2px solid #00ffff;
+    border-radius: 5px;
+    color: #00ffff;
+    font-size: 1rem;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.genre-card textarea {
+    height: 180px; 
+    resize: none; 
+    overflow-y: auto; 
+}
+
+
+
+.genre-card input:focus,
+.genre-card textarea:focus {
+    border-color: #ff00ff; 
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+.genre-card button {
+    margin: 0.5rem 0.25rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.genre-card button:first-of-type {
+    background-color: #00ffff;
+    color: #000;
+}
+
+.genre-card button:first-of-type:hover {
+    background-color: #00cccc;
+}
+
+.genre-card button:last-of-type {
+    background-color: #ff00ff; 
+    color: #fff;
+}
+
+.genre-card button:last-of-type:hover {
+    background-color: #cc0099;
+}
+
+/* boton del modal */
+.modal-delete-button {
+    background-color: #ff00ff; 
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #cc0099;
+    box-shadow: 0 0 10px #ff00ff;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.modal-delete-button:hover {
+    background-color: #cc0099; 
+    box-shadow: 0 0 15px #cc0099;
+    transform: scale(1.05);
+}
+
+/* Scroll del textarea */
+.genre-card textarea::-webkit-scrollbar {
+    width: 8px; /* Grosor del scroll */
+}
+
+.genre-card textarea::-webkit-scrollbar-track {
+    background: #111; /* Fondo oscuro */
+    border-radius: 10px;
+}
+
+.genre-card textarea::-webkit-scrollbar-thumb {
+    background: #00ffff; /* Color neón */
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.genre-card textarea::-webkit-scrollbar-thumb:hover {
+    background: #ff00ff;
+}
+
+/* Scroll dentro de las tarjetas */
+.genre-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.genre-card::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 10px;
+}
+
+.genre-card::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffff;
+}
+
+.genre-card::-webkit-scrollbar-thumb:hover {
+    background: #ff00ff;
+}
+

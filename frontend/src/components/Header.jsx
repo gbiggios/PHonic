@@ -21,7 +21,7 @@ const Header = () => {
       </div>
       <nav>
         <ul>
-          <li onClick={handleInicioClick}>Inicio</li>
+          <li onClick={handleInicioClick}>Login</li>
           <li>Artistas</li>
           <li>Álbumes</li>
           <li>Contacto</li>

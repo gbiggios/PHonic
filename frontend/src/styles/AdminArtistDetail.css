@@ -1,0 +1,333 @@
+/* AdminArtistDetail.css */
+
+.artist-detail-container {
+    background-color: #121212; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco predeterminado */
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .artist-detail-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f0f; /* Neon pink */
+    text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+    margin-bottom: 20px;
+  }
+  
+  .artist-detail-content {
+    width: 100%;
+    max-width: 600px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(240, 0, 255, 0.5);
+  }
+  
+  .artist-detail-text {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #ddd;
+  }
+  
+  .artist-detail-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    border: 2px solid #f0f;
+    border-radius: 5px;
+    background-color: #121212;
+    color: #fff;
+  }
+  
+  .artist-detail-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .artist-detail-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+  }
+  
+  .artist-detail-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .artist-detail-button.delete {
+    background-color: #ff0000;
+    color: #fff;
+  }
+  
+  .modal-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .modal-button.cancel {
+    background-color: #444;
+    color: #fff;
+  }
+
+  .artist-genres-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.artist-remove-genre-button {
+    margin-left: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Formulario */
+.admin-artist-form {
+  background-color: #1b1b1b; /* Fondo oscuro */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Efecto neon */
+  margin-top: 20px;
+  color: #ffffff; /* Texto blanco */
+  max-width: 900px;
+  margin: auto;
+}
+
+.admin-artist-form label {
+  display: block;
+  font-size: 1.2rem;
+  color: #00ffff; /* Azul neon */
+  text-shadow: 0 0 5px #00ffff;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.admin-artist-form input,
+.admin-artist-form textarea,
+.admin-artist-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  background-color: #121212;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  font-size: 1rem;
+}
+
+.admin-artist-form input:focus,
+.admin-artist-form textarea:focus,
+.admin-artist-form select:focus {
+  outline: none;
+  border-color: #ff00ff; /* Rosa neon */
+  box-shadow: 0 0 15px #ff00ff;
+}
+
+.admin-artist-form h2 {
+  font-size: 1.8rem;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.admin-artist-form button {
+  background-color: #00ffff;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.admin-artist-form button:hover {
+  background-color: #ff00ff;
+  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+}
+
+.admin-artist-form .remove-button {
+  background-color: #ff3333;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.admin-artist-form .remove-button:hover {
+  background-color: #ff0000;
+  box-shadow: 0 0 15px #ff3333, 0 0 30px #ff3333;
+}
+
+/* Botones */
+.admin-artist-form .action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
+  margin-top: 20px;
+}
+
+.admin-artist-form .action-buttons .save-button {
+  background-color: #00ff00; 
+  color: #121212;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.admin-artist-form .action-buttons .save-button:hover {
+  background-color: #00cc00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8);
+  transform: scale(1.05);
+}
+
+.admin-artist-form .action-buttons .cancel-button {
+  background-color: #ff3333;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
+}
+
+.admin-artist-form .action-buttons .cancel-button:hover {
+  background-color: #cc0000;
+  box-shadow: 0 0 20px rgba(255, 51, 51, 0.8);
+  transform: scale(1.05);
+}
+
+.admin-artist-form .remove-button {
+  background-color: #ff9933;
+  color: #121212;
+  padding: 5px 15px; 
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 153, 51, 0.5);
+}
+
+.admin-artist-form .remove-button:hover {
+  background-color: #cc6600; 
+  box-shadow: 0 0 15px rgba(255, 153, 51, 0.8);
+  transform: scale(1.05);
+}
+
+.admin-artist-form .remove-button-d {
+  background-color: #ff33ff;
+  color: #121212;
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 51, 255, 0.8), 0 0 40px rgba(255, 51, 255, 0.5);
+}
+
+.admin-artist-form .remove-button-d:hover {
+  background-color: #960396;
+  box-shadow: 0 0 30px rgba(255, 51, 255, 1), 0 0 60px rgba(255, 51, 255, 0.8); 
+  transform: scale(1.05);
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start; /* Alinea los botones a la izquierda */
+  gap: 15px; /* Espaciado entre botones */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button-group.centered {
+  justify-content: center; /* Alinea los botones al centro */
+}
+
+.disco-container,
+.cancion-container {
+  margin-bottom: 20px;
+}
+
+.admin-artist-form button {
+  background-color: #00ffff;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-artist-form .remove-button {
+  background-color: #ff9933;
+  color: #121212;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-artist-form .remove-button:hover {
+  background-color: #cc6600;
+  box-shadow: 0 0 15px rgba(255, 153, 51, 0.8);
+  transform: scale(1.05);
+}
+
+/* Personalizar el scrollbar del select */
+select::-webkit-scrollbar {
+  width: 5px; /* Grosor del scroll */
+}
+
+select::-webkit-scrollbar-thumb {
+  background-color: #ff00ff; /* Neon fucsia */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+select::-webkit-scrollbar-thumb:hover {
+  background-color: #e600e6; /* Color más intenso al pasar el mouse */
+}
+
+select::-webkit-scrollbar-track {
+  background-color: #121212; /* Fondo oscuro */
+}

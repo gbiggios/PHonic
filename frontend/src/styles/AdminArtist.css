@@ -1,0 +1,211 @@
+.admin-artist-container {
+    background-color: #0d1117;
+    color: #00ffff;
+    font-family: "Arial", sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .admin-artist-title, .admin-artist-created-title {
+    text-align: center;
+    font-size: 2.5em;
+    text-shadow: 0 0 10px #00ffff;
+  }
+  
+  .admin-artist-form {
+    background: #161b22;
+    padding: 20px;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    width: 95%;
+    margin: 20px auto;
+    box-shadow: 0 0 20px #00ffff;
+  }
+  
+  .admin-artist-label {
+    color: #ffffff;
+    margin-top: 10px;
+    display: block;
+    text-align: left;
+  }
+  
+  .admin-artist-input, .admin-artist-textarea {
+    background-color: #0d1117;
+    color: #00ffff;
+    border: 1px solid #00ffff;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .admin-artist-textarea {
+    height: 150px; 
+    font-size: 16px; 
+}
+
+  
+  .admin-artist-button {
+    background-color: #00ffff;
+    color: #0d1117;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .admin-artist-card {
+    background-color: #161b22;
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 60%;
+    box-shadow: 0 0 15px #00ffff;
+  }
+  
+  /* Botón general */
+.admin-artist-button {
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+/* Botón para agregar género */
+.add-genre-button {
+  background-color: #ff7f50; /* Coral */
+  color: #fff;
+  border: 2px solid #ff7f50;
+}
+.add-genre-button:hover {
+  background-color: #ff4500; /* OrangeRed */
+  border-color: #ff4500;
+  color: #fff;
+}
+
+/* Botón para agregar disco */
+.add-disco-button {
+  background-color: #32cd32; /* LimeGreen */
+  color: #fff;
+  border: 2px solid #32cd32;
+}
+.add-disco-button:hover {
+  background-color: #228b22; /* ForestGreen */
+  border-color: #228b22;
+  color: #fff;
+}
+
+/* Botón para agregar canción */
+.add-cancion-button {
+  background-color: #1e90ff; /* DodgerBlue */
+  color: #fff;
+  border: 2px solid #1e90ff;
+}
+.add-cancion-button:hover {
+  background-color: #0000ff; /* Blue */
+  border-color: #0000ff;
+  color: #fff;
+}
+
+/* Botón para guardar artista */
+.submit-button {
+  background-color: #ff1493; /* DeepPink */
+  color: #fff;
+  border: 2px solid #ff1493;
+  width: 100%;
+}
+.submit-button:hover {
+  background-color: #c71585; /* MediumVioletRed */
+  border-color: #c71585;
+  color: #fff;
+}
+
+/* Estilo para el scroll */
+.admin-artist-textarea::-webkit-scrollbar {
+  width: 8px; /* Ancho del scroll */
+  background-color: #101117; /* Color del fondo del track */
+}
+
+.admin-artist-textarea::-webkit-scrollbar-thumb {
+  background-color: #00ffff; /* Color neón del scroll */
+  border-radius: 4px; /* Bordes redondeados */
+  border: 2px solid #101117; /* Espacio entre el scroll y el fondo */
+}
+
+.admin-artist-textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #00cccc; /* Cambia a un tono más oscuro cuando pase el mouse */
+}
+
+
+.admin-artist-button.remove-genre-button,
+.admin-artist-button.remove-disco-button,
+.admin-artist-button.remove-cancion-button,
+.admin-artist-button.remove-social-button {
+  background-color: #ff4d4d;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.admin-artist-button.remove-genre-button:hover,
+.admin-artist-button.remove-disco-button:hover,
+.admin-artist-button.remove-cancion-button:hover,
+.admin-artist-button.remove-social-button:hover {
+  background-color: #cc0000;
+}
+
+/* Contenedor para los discos */
+.admin-artist-disco-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #00ffff;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+}
+
+/* Contenedor para las canciones */
+.admin-artist-canciones-container {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #00ffff;
+  border-radius: 5px;
+  background-color: #282828;
+}
+
+/* Botones de discos */
+.admin-artist-disco-buttons {
+  margin-top: 15px;
+  text-align: right;
+}
+
+/* Botones generales */
+.admin-artist-button {
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.admin-artist-button.add-cancion-button,
+.admin-artist-button.add-disco-button,
+.admin-artist-button.add-social-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.admin-artist-button.remove-cancion-button,
+.admin-artist-button.remove-disco-button {
+  background-color: #f44336;
+  color: white;
+}
