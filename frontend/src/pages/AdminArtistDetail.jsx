@@ -23,7 +23,14 @@ const AdminArtistDetail = () => {
         biografia: '',
         fecha_nacimiento: '',
         redesSociales: [],
-        discos: [],
+        discos: [
+            {
+                titulo: '',
+                fecha_lanzamiento: '',
+                generos: [],
+                canciones: [], // Las canciones deben ser un array
+            },
+        ],
         generos: [],
     });
 
@@ -56,8 +63,8 @@ const AdminArtistDetail = () => {
                 // Agregar canciones a los discos
                 for (const disco of discosData) {
                     const cancionesResponse = await api.get(`/api/canciones/`);
-                    disco.canciones = cancionesResponse.data.filter((cancion) => cancion.disco === disco.id);
-                }
+                    disco.canciones = cancionesResponse.data.filter((cancion) => cancion.disco === disco.id) || [];
+                }                
     
                 // Fetch redes sociales relacionadas con el artista
                 const redesResponse = await api.get(`/api/redes_sociales/`);
@@ -107,46 +114,83 @@ const AdminArtistDetail = () => {
 
 
 
-    // Handle Input Changes
+    // manejar correctamente las actualizaciones de campos anidados
     const handleChange = (e, index, field, section = null, parentIndex = null) => {
         const value = e.target.value;
-        if (section) {
-            const updatedSection = [...artist[section]];
-            if (parentIndex !== null) {
-                updatedSection[parentIndex][section][index][field] = value;
-            } else {
-                updatedSection[index][field] = value;
+    
+        if (section && parentIndex !== null) {
+            // Estamos modificando una canción dentro de un disco
+            const updatedDiscos = [...artist.discos]; // Copiamos los discos
+            const updatedDisco = { ...updatedDiscos[parentIndex] }; // Copiamos el disco actual
+    
+            // Aseguramos que `canciones` es un array válido
+            if (!Array.isArray(updatedDisco.canciones)) {
+                updatedDisco.canciones = [];
             }
+    
+            const updatedCanciones = [...updatedDisco.canciones]; // Copiamos las canciones del disco actual
+            const updatedCancion = { ...updatedCanciones[index] }; // Copiamos la canción específica
+    
+            updatedCancion[field] = value; // Actualizamos el campo de la canción
+            updatedCanciones[index] = updatedCancion; // Reemplazamos la canción actualizada en el array de canciones
+            updatedDisco.canciones = updatedCanciones; // Reemplazamos las canciones actualizadas en el disco
+            updatedDiscos[parentIndex] = updatedDisco; // Reemplazamos el disco actualizado en los discos
+    
+            // Actualizamos el estado del artista
+            setArtist({ ...artist, discos: updatedDiscos });
+        } else if (section) {
+            // Modificando elementos de secciones de nivel superior (e.g., redes sociales)
+            const updatedSection = [...artist[section]];
+            const updatedItem = { ...updatedSection[index] };
+            updatedItem[field] = value;
+            updatedSection[index] = updatedItem;
             setArtist({ ...artist, [section]: updatedSection });
         } else {
+            // Modificando un campo de nivel superior
             setArtist({ ...artist, [field]: value });
         }
     };
+    
+    
+    
 
     const handleAddField = (section, newField, parentIndex = null) => {
         if (parentIndex !== null) {
-            const updatedDiscos = [...artist.discos];
-            updatedDiscos[parentIndex][section].push(newField);
-            setArtist({ ...artist, discos: updatedDiscos });
+            // Estamos agregando un elemento anidado (e.g., una canción dentro de un disco)
+            const updatedSection = [...artist.discos];
+            const updatedItem = { ...updatedSection[parentIndex] };
+            const updatedNestedSection = [...updatedItem[section], newField];
+            updatedItem[section] = updatedNestedSection;
+            updatedSection[parentIndex] = updatedItem;
+            setArtist({ ...artist, discos: updatedSection });
         } else {
+            // Agregando a una sección de nivel superior
             setArtist({
                 ...artist,
                 [section]: [...artist[section], newField],
             });
         }
     };
+    
 
     const handleRemoveField = (section, index, parentIndex = null) => {
         if (parentIndex !== null) {
-            const updatedDiscos = [...artist.discos];
-            updatedDiscos[parentIndex][section].splice(index, 1);
-            setArtist({ ...artist, discos: updatedDiscos });
+            // Estamos eliminando un elemento anidado
+            const updatedSection = [...artist.discos];
+            const updatedItem = { ...updatedSection[parentIndex] };
+            const updatedNestedSection = [...updatedItem[section]];
+            updatedNestedSection.splice(index, 1);
+            updatedItem[section] = updatedNestedSection;
+            updatedSection[parentIndex] = updatedItem;
+            setArtist({ ...artist, discos: updatedSection });
         } else {
+            // Eliminando de una sección de nivel superior
             const updatedSection = [...artist[section]];
             updatedSection.splice(index, 1);
             setArtist({ ...artist, [section]: updatedSection });
         }
     };
+    
 
     const handleToggleEdit = () => {
         if (isEditing) {
@@ -160,82 +204,106 @@ const AdminArtistDetail = () => {
         setLoading(true);
         setSuccess("");
         setError("");
-
+    
         // Validar datos requeridos
         if (!artist.nombre_artistico || !artist.nombre || !artist.biografia || !artist.fecha_nacimiento) {
             setError("Por favor, completa todos los campos obligatorios.");
             setLoading(false);
             return;
         }
-
-        if (artist.generos.length === 0) {
-            setError("Debes seleccionar al menos un género musical.");
-            setLoading(false);
-            return;
-        }
-
+    
         try {
-            // Actualizar datos del artista
-            await api.put(`/api/artistas/${id}`, {
+            // Actualizar datos básicos del artista
+            console.log("Enviando datos del artista:", artist);
+            await api.put(`/api/artistas/${id}/`, {
                 nombre_artistico: artist.nombre_artistico,
                 nombre: artist.nombre,
                 biografia: artist.biografia,
                 fecha_nacimiento: artist.fecha_nacimiento,
-                generos: artist.generos.map((g) => g.id),
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
             });
-            
-
-            // Actualizar géneros musicales asociados
-            await api.put(`/api/artistas/${id}/generos/`, {
-                generos: artist.generos.map((g) => g.id), // Envía solo los IDs de los géneros
-            });
-
-
-            // Actualizar discos y canciones
+    
+            // Actualizar o crear discos y canciones asociadas
             for (const disco of artist.discos) {
-                if (disco.id) {
-                    // Actualizar disco existente
-                    await api.put(`/api/discos/${disco.id}`, disco);
-                } else {
-                    // Crear nuevo disco
-                    const discoResponse = await api.post(`/api/discos/`, {
-                        ...disco,
-                        artista: id,
-                    });
-                    const discoId = discoResponse.data.id;
-
+                try {
+                    let discoId;
+                    const discoPayload = {
+                        titulo: disco.titulo,
+                        fecha_lanzamiento: disco.fecha_lanzamiento,
+                        generos: disco.generos.map((g) => (typeof g === "object" ? g.id : g)), // Garantizar IDs
+                        artistas: [id], // Vincula el disco al artista actual
+                    };
+    
+                    console.log("Payload del disco:", JSON.stringify(discoPayload, null, 2));
+    
+                    if (disco.id) {
+                        // Actualizar disco existente
+                        const response = await api.put(`/api/discos/${disco.id}/`, discoPayload);
+                        discoId = response.data.id;
+                    } else {
+                        // Crear nuevo disco
+                        const response = await api.post(`/api/discos/`, discoPayload);
+                        discoId = response.data.id;
+                    }
+    
+                    // Actualizar o crear canciones del disco
                     for (const cancion of disco.canciones) {
-                        if (cancion.id) {
-                            await api.put(`/api/canciones/${cancion.id}`, cancion);
-                        } else {
-                            await api.post(`/api/canciones/`, { ...cancion, disco: discoId });
+                        try {
+                            const cancionPayload = {
+                                titulo: cancion.titulo,
+                                duracion: cancion.duracion,
+                                fecha_lanzamiento: cancion.fecha_lanzamiento,
+                                disco: discoId,
+                            };
+    
+                            console.log("Payload de la canción:", JSON.stringify(cancionPayload, null, 2));
+    
+                            if (cancion.id) {
+                                await api.put(`/api/canciones/${cancion.id}/`, cancionPayload);
+                            } else {
+                                await api.post(`/api/canciones/`, cancionPayload);
+                            }
+                        } catch (error) {
+                            console.error(`Error actualizando/creando canción: ${cancion.titulo}`, error.response?.data);
                         }
                     }
+                } catch (error) {
+                    console.error(`Error actualizando/creando disco: ${disco.titulo}`, error.response?.data);
                 }
             }
-
-            // Actualizar redes sociales
+    
+            // Actualizar o crear redes sociales
             for (const red of artist.redesSociales) {
-                if (red.id) {
-                    await api.put(`/api/redes_sociales/${red.id}`, red);
-                } else {
-                    await api.post(`/api/redes_sociales/`, { ...red, artista: id });
+                try {
+                    const redPayload = {
+                        nombre: red.nombre,
+                        enlace: red.enlace,
+                        artista: id,
+                    };
+    
+                    console.log("Payload de la red social:", JSON.stringify(redPayload, null, 2));
+    
+                    if (red.id) {
+                        await api.put(`/api/redes_sociales/${red.id}/`, redPayload);
+                    } else {
+                        await api.post(`/api/redes_sociales/`, redPayload);
+                    }
+                } catch (error) {
+                    console.error(`Error actualizando/creando red social: ${red.nombre}`, error.response?.data);
                 }
             }
-
-            setSuccess("¡Artista actualizado correctamente!");
+    
+            setSuccess("¡Datos actualizados correctamente!");
             setIsEditing(false);
         } catch (error) {
-            console.error('Error updating artist:', error);
-            setError("Error al actualizar el artista.");
+            console.error("Error general al actualizar:", error.response?.data || error.message);
+            setError("Ocurrió un error al actualizar los datos. Por favor, inténtalo nuevamente.");
         } finally {
             setLoading(false);
         }
     };
+    
+    
+    
 
     const handleDelete = async () => {
         setLoading(true);
@@ -336,9 +404,7 @@ const AdminArtistDetail = () => {
                                 <input
                                     type="text"
                                     value={red.nombre || ""}
-                                    onChange={(e) =>
-                                        handleChange(e, index, "plataforma", "redesSociales")
-                                    }
+                                    onChange={(e) => handleChange(e, index, "nombre", "redesSociales")}
                                     required
                                     disabled={!isEditing}
                                 />
@@ -346,9 +412,7 @@ const AdminArtistDetail = () => {
                                 <input
                                     type="url"
                                     value={red.enlace || ""}
-                                    onChange={(e) =>
-                                        handleChange(e, index, "url", "redesSociales")
-                                    }
+                                    onChange={(e) => handleChange(e, index, "enlace", "redesSociales")}
                                     required
                                     disabled={!isEditing}
                                 />
@@ -447,7 +511,7 @@ const AdminArtistDetail = () => {
 
                                 {/* Canciones del Disco */}
                                 <h3>Canciones</h3>
-                                {disco.canciones.length > 0 ? (
+                                {Array.isArray(disco.canciones) && disco.canciones.length > 0 ? (
                                     disco.canciones.map((cancion, i) => (
                                         <div key={i} className="cancion-container">
                                             <label>Título de la Canción:</label>

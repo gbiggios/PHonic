@@ -1,16 +1,16 @@
 import axios from 'axios';
-import Cookies from 'js-cookie'; // Asegúrate de que js-cookie esté instalado
+import Cookies from 'js-cookie';
 
 const api = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/`, // Tu base URL
-    withCredentials: true, // Habilita el envío de cookies
+    baseURL: `${process.env.REACT_APP_API_URL}/`, // Tu URL base
+    withCredentials: true, // Envío de cookies habilitado
 });
 
-// Interceptor para agregar el token CSRF
+// Interceptor para agregar el token CSRF a las solicitudes
 api.interceptors.request.use((config) => {
-    const csrfToken = Cookies.get('csrftoken'); // Recupera el token CSRF de las cookies
+    const csrfToken = Cookies.get('csrftoken');
     if (csrfToken) {
-        config.headers['X-CSRFToken'] = csrfToken; // Agrega el token como encabezado
+        config.headers['X-CSRFToken'] = csrfToken; // Agregar el token CSRF al encabezado
     }
     return config;
 });
