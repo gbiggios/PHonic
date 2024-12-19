@@ -1,0 +1,32 @@
+
+## Usuarios:
+
+El siguiente proyecto cuenta con un superusuario y varios usuarios de prueba con distinto tipos de privilegios de is_staff.
+Para 
+
+Se crea para superusuario dos usuarios normales y dos usuarios con permiso de administracion is_staff
+
+# Superusuario:
+
+superuser username: admin
+correo superuser: admin@admin.cl
+password: 123456
+
+
+# Usuarios normales:
+
+username: camilo
+password: colocolo12
+
+username: martin
+password: colocolo12
+
+
+# Usuarios con permiso de staff:
+
+username: fiona
+password: colocolo12
+
+username: paula
+password: colocolo12
+
