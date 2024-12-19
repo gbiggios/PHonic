@@ -134,6 +134,11 @@
   color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
   font-size: 1rem;
+
+}
+
+.admin-artist-form textarea {
+  height: 150px; 
 }
 
 .admin-artist-form input:focus,
@@ -349,3 +354,74 @@ textarea::-webkit-scrollbar-thumb:hover {
 textarea::-webkit-scrollbar-track {
   background-color: #121212; /* Fondo oscuro */
 }
+
+
+.disco-container {
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.disco-header {
+  margin-bottom: 15px;
+}
+
+.canciones-container {
+  border-top: 1px solid #00ffff;
+  padding-top: 15px;
+}
+
+.cancion-item {
+  margin-bottom: 15px;
+}
+
+button.add-disco-button,
+button.remove-button {
+  margin-top: 10px;
+  background-color: #00ffff;
+  color: #121212;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.remove-button {
+  background-color: #ff9933;
+}
+
+button:hover {
+  box-shadow: 0 0 15px #00ffff;
+  transform: scale(1.05);
+}
+
+/* Contenedor para centrar el botón de quitar disco */
+.remove-disco-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  margin-top: 15px; /* Espaciado superior */
+}
+
+/* Botón de quitar disco con un diseño distinto */
+.remove-disco-container .remove-disco-button {
+  background-color: #ff4d4d; /* Rojo brillante para destacar */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #ff4d4d;
+}
+
+.remove-disco-container .remove-disco-button:hover {
+  background-color: #e60000; /* Rojo más oscuro al pasar el cursor */
+  box-shadow: 0 0 15px #e60000;
+  transform: scale(1.05);
+}
+

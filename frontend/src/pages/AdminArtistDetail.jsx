@@ -41,35 +41,35 @@ const AdminArtistDetail = () => {
                 // Fetch datos básicos del artista
                 const artistResponse = await api.get(`/api/artistas/${id}/`);
                 const artistData = artistResponse.data;
-    
+
                 // Fetch discos relacionados con el artista
                 const discosResponse = await api.get(`/api/discos/`);
                 const discosData = discosResponse.data.filter((disco) =>
                     disco.artistas.includes(parseInt(id))
                 );
-    
+
                 // Fetch géneros asociados a los discos
                 let generosAsociados = [];
                 for (const disco of discosData) {
                     const generosResponse = await api.get(`/api/discos/${disco.id}/generos/`);
                     generosAsociados.push(...generosResponse.data);
                 }
-    
+
                 // Eliminar duplicados de géneros
                 const generosUnicos = Array.from(
                     new Set(generosAsociados.map((genero) => genero.id))
                 ).map((id) => generosAsociados.find((genero) => genero.id === id));
-    
+
                 // Agregar canciones a los discos
                 for (const disco of discosData) {
                     const cancionesResponse = await api.get(`/api/canciones/`);
                     disco.canciones = cancionesResponse.data.filter((cancion) => cancion.disco === disco.id) || [];
-                }                
-    
+                }
+
                 // Fetch redes sociales relacionadas con el artista
                 const redesResponse = await api.get(`/api/redes_sociales/`);
                 const redesData = redesResponse.data.filter((red) => `${red.artista}` === `${id}`);
-    
+
                 // Setear todos los datos en el estado
                 setArtist({
                     nombre_artistico: artistData.nombre_artistico || '',
@@ -80,7 +80,7 @@ const AdminArtistDetail = () => {
                     redesSociales: redesData,
                     generos: generosUnicos || [], // Géneros únicos relacionados
                 });
-    
+
                 setOriginalArtist({
                     nombre_artistico: artistData.nombre_artistico || '',
                     nombre: artistData.nombre || '',
@@ -96,7 +96,7 @@ const AdminArtistDetail = () => {
                 setLoading(false);
             }
         };
-    
+
         const fetchAllGenres = async () => {
             try {
                 const response = await api.get("/api/generos/");
@@ -105,11 +105,11 @@ const AdminArtistDetail = () => {
                 console.error("Error al cargar géneros:", err);
             }
         };
-    
+
         fetchArtistData();
         fetchAllGenres();
     }, [id]);
-    
+
 
 
 
@@ -117,25 +117,25 @@ const AdminArtistDetail = () => {
     // manejar correctamente las actualizaciones de campos anidados
     const handleChange = (e, index, field, section = null, parentIndex = null) => {
         const value = e.target.value;
-    
+
         if (section && parentIndex !== null) {
             // Estamos modificando una canción dentro de un disco
             const updatedDiscos = [...artist.discos]; // Copiamos los discos
             const updatedDisco = { ...updatedDiscos[parentIndex] }; // Copiamos el disco actual
-    
+
             // Aseguramos que `canciones` es un array válido
             if (!Array.isArray(updatedDisco.canciones)) {
                 updatedDisco.canciones = [];
             }
-    
+
             const updatedCanciones = [...updatedDisco.canciones]; // Copiamos las canciones del disco actual
             const updatedCancion = { ...updatedCanciones[index] }; // Copiamos la canción específica
-    
+
             updatedCancion[field] = value; // Actualizamos el campo de la canción
             updatedCanciones[index] = updatedCancion; // Reemplazamos la canción actualizada en el array de canciones
             updatedDisco.canciones = updatedCanciones; // Reemplazamos las canciones actualizadas en el disco
             updatedDiscos[parentIndex] = updatedDisco; // Reemplazamos el disco actualizado en los discos
-    
+
             // Actualizamos el estado del artista
             setArtist({ ...artist, discos: updatedDiscos });
         } else if (section) {
@@ -150,9 +150,9 @@ const AdminArtistDetail = () => {
             setArtist({ ...artist, [field]: value });
         }
     };
-    
-    
-    
+
+
+
 
     const handleAddField = (section, newField, parentIndex = null) => {
         if (parentIndex !== null) {
@@ -171,7 +171,7 @@ const AdminArtistDetail = () => {
             });
         }
     };
-    
+
 
     const handleRemoveField = (section, index, parentIndex = null) => {
         if (parentIndex !== null) {
@@ -190,7 +190,7 @@ const AdminArtistDetail = () => {
             setArtist({ ...artist, [section]: updatedSection });
         }
     };
-    
+
 
     const handleToggleEdit = () => {
         if (isEditing) {
@@ -204,14 +204,14 @@ const AdminArtistDetail = () => {
         setLoading(true);
         setSuccess("");
         setError("");
-    
+
         // Validar datos requeridos
         if (!artist.nombre_artistico || !artist.nombre || !artist.biografia || !artist.fecha_nacimiento) {
             setError("Por favor, completa todos los campos obligatorios.");
             setLoading(false);
             return;
         }
-    
+
         try {
             // Actualizar datos básicos del artista
             console.log("Enviando datos del artista:", artist);
@@ -221,7 +221,7 @@ const AdminArtistDetail = () => {
                 biografia: artist.biografia,
                 fecha_nacimiento: artist.fecha_nacimiento,
             });
-    
+
             // Actualizar o crear discos y canciones asociadas
             for (const disco of artist.discos) {
                 try {
@@ -232,9 +232,9 @@ const AdminArtistDetail = () => {
                         generos: disco.generos.map((g) => (typeof g === "object" ? g.id : g)), // Garantizar IDs
                         artistas: [id], // Vincula el disco al artista actual
                     };
-    
+
                     console.log("Payload del disco:", JSON.stringify(discoPayload, null, 2));
-    
+
                     if (disco.id) {
                         // Actualizar disco existente
                         const response = await api.put(`/api/discos/${disco.id}/`, discoPayload);
@@ -244,7 +244,7 @@ const AdminArtistDetail = () => {
                         const response = await api.post(`/api/discos/`, discoPayload);
                         discoId = response.data.id;
                     }
-    
+
                     // Actualizar o crear canciones del disco
                     for (const cancion of disco.canciones) {
                         try {
@@ -254,9 +254,9 @@ const AdminArtistDetail = () => {
                                 fecha_lanzamiento: cancion.fecha_lanzamiento,
                                 disco: discoId,
                             };
-    
+
                             console.log("Payload de la canción:", JSON.stringify(cancionPayload, null, 2));
-    
+
                             if (cancion.id) {
                                 await api.put(`/api/canciones/${cancion.id}/`, cancionPayload);
                             } else {
@@ -270,7 +270,7 @@ const AdminArtistDetail = () => {
                     console.error(`Error actualizando/creando disco: ${disco.titulo}`, error.response?.data);
                 }
             }
-    
+
             // Actualizar o crear redes sociales
             for (const red of artist.redesSociales) {
                 try {
@@ -279,9 +279,9 @@ const AdminArtistDetail = () => {
                         enlace: red.enlace,
                         artista: id,
                     };
-    
+
                     console.log("Payload de la red social:", JSON.stringify(redPayload, null, 2));
-    
+
                     if (red.id) {
                         await api.put(`/api/redes_sociales/${red.id}/`, redPayload);
                     } else {
@@ -291,7 +291,7 @@ const AdminArtistDetail = () => {
                     console.error(`Error actualizando/creando red social: ${red.nombre}`, error.response?.data);
                 }
             }
-    
+
             setSuccess("¡Datos actualizados correctamente!");
             setIsEditing(false);
         } catch (error) {
@@ -301,9 +301,9 @@ const AdminArtistDetail = () => {
             setLoading(false);
         }
     };
-    
-    
-    
+
+
+
 
     const handleDelete = async () => {
         setLoading(true);
@@ -347,14 +347,16 @@ const AdminArtistDetail = () => {
 
 
 
-    if (loading) return <Spinner />;
-    if (!artist) return <p>Error al cargar los datos del artista.</p>;
-
-
+    
 
     return (
         <>
             <Slider />
+            {loading && (
+            <div className="spinner-overlay">
+                <Spinner />
+            </div>
+        )}
             <div className="admin-artist-container">
                 <h1 className="artist-detail-title">
                     {artist.nombre_artistico || 'Información no disponible'}
@@ -492,79 +494,69 @@ const AdminArtistDetail = () => {
                         artist.discos.map((disco, index) => (
                             <div key={index} className="disco-container">
                                 {/* Información del Disco */}
-                                <label>Título del Disco:</label>
-                                <input
-                                    type="text"
-                                    value={disco.titulo || ""}
-                                    onChange={(e) => handleChange(e, index, "titulo", "discos")}
-                                    disabled={!isEditing}
-                                    required
-                                />
-                                <label>Fecha de Lanzamiento:</label>
-                                <input
-                                    type="date"
-                                    value={disco.fecha_lanzamiento || ""}
-                                    onChange={(e) => handleChange(e, index, "fecha_lanzamiento", "discos")}
-                                    disabled={!isEditing}
-                                    required
-                                />
+                                <div className="disco-header">
+                                    <label>Título del Disco:</label>
+                                    <input
+                                        type="text"
+                                        value={disco.titulo || ""}
+                                        onChange={(e) => handleChange(e, index, "titulo", "discos")}
+                                        disabled={!isEditing}
+                                        required
+                                    />
+                                    <label>Fecha de Lanzamiento:</label>
+                                    <input
+                                        type="date"
+                                        value={disco.fecha_lanzamiento || ""}
+                                        onChange={(e) => handleChange(e, index, "fecha_lanzamiento", "discos")}
+                                        disabled={!isEditing}
+                                        required
+                                    />
+                                </div>
 
                                 {/* Canciones del Disco */}
-                                <h3>Canciones</h3>
-                                {Array.isArray(disco.canciones) && disco.canciones.length > 0 ? (
-                                    disco.canciones.map((cancion, i) => (
-                                        <div key={i} className="cancion-container">
-                                            <label>Título de la Canción:</label>
-                                            <input
-                                                type="text"
-                                                value={cancion.titulo || ""}
-                                                onChange={(e) =>
-                                                    handleChange(e, i, "titulo", "canciones", index)
-                                                }
-                                                disabled={!isEditing}
-                                                required
-                                            />
-                                            <label>Duración (HH:MM:SS):</label>
-                                            <input
-                                                type="text"
-                                                placeholder="HH:MM:SS"
-                                                value={cancion.duracion || ""}
-                                                onChange={(e) =>
-                                                    handleChange(e, i, "duracion", "canciones", index)
-                                                }
-                                                disabled={!isEditing}
-                                                required
-                                            />
-                                            <label>Fecha de Lanzamiento:</label>
-                                            <input
-                                                type="date"
-                                                value={cancion.fecha_lanzamiento || ""}
-                                                onChange={(e) =>
-                                                    handleChange(
-                                                        e,
-                                                        i,
-                                                        "fecha_lanzamiento",
-                                                        "canciones",
-                                                        index
-                                                    )
-                                                }
-                                                disabled={!isEditing}
-                                                required
-                                            />
-                                            {isEditing && (
-                                                <div className="button-group">
-                                                    <button
-                                                        type="button"
-                                                        onClick={() =>
-                                                            handleAddField(
-                                                                "canciones",
-                                                                { titulo: "", duracion: "", fecha_lanzamiento: "" },
-                                                                index
-                                                            )
-                                                        }
-                                                    >
-                                                        Agregar Canción
-                                                    </button>
+                                <div className="canciones-container">
+                                    <h3>Canciones</h3>
+                                    {Array.isArray(disco.canciones) && disco.canciones.length > 0 ? (
+                                        disco.canciones.map((cancion, i) => (
+                                            <div key={i} className="cancion-item">
+                                                <label>Título de la Canción:</label>
+                                                <input
+                                                    type="text"
+                                                    value={cancion.titulo || ""}
+                                                    onChange={(e) =>
+                                                        handleChange(e, i, "titulo", "canciones", index)
+                                                    }
+                                                    disabled={!isEditing}
+                                                    required
+                                                />
+                                                <label>Duración (HH:MM:SS):</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="HH:MM:SS"
+                                                    value={cancion.duracion || ""}
+                                                    onChange={(e) =>
+                                                        handleChange(e, i, "duracion", "canciones", index)
+                                                    }
+                                                    disabled={!isEditing}
+                                                    required
+                                                />
+                                                <label>Fecha de Lanzamiento:</label>
+                                                <input
+                                                    type="date"
+                                                    value={cancion.fecha_lanzamiento || ""}
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            e,
+                                                            i,
+                                                            "fecha_lanzamiento",
+                                                            "canciones",
+                                                            index
+                                                        )
+                                                    }
+                                                    disabled={!isEditing}
+                                                    required
+                                                />
+                                                {isEditing && (
                                                     <button
                                                         type="button"
                                                         className="remove-button"
@@ -572,12 +564,39 @@ const AdminArtistDetail = () => {
                                                     >
                                                         Quitar Canción
                                                     </button>
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>No hay canciones disponibles.</p>
+                                                )}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No hay canciones disponibles.</p>
+                                    )}
+                                    {isEditing && (
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                handleAddField(
+                                                    "canciones",
+                                                    { titulo: "", duracion: "", fecha_lanzamiento: "" },
+                                                    index
+                                                )
+                                            }
+                                        >
+                                            Agregar Canción
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Botón para Quitar Disco */}
+                                {isEditing && (
+                                     <div className="remove-disco-container">
+                                     <button
+                                         type="button"
+                                         className="remove-disco-button"
+                                         onClick={() => handleRemoveField("discos", index)}
+                                     >
+                                         Quitar Disco
+                                     </button>
+                                 </div>
                                 )}
                             </div>
                         ))
@@ -585,35 +604,22 @@ const AdminArtistDetail = () => {
                         <p>No hay discos disponibles.</p>
                     )}
 
-                    {/* Botones para Agregar y Quitar Discos */}
+                    {/* Botón para Agregar Disco */}
                     {isEditing && (
-                        <div className="button-group centered">
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    handleAddField("discos", {
-                                        titulo: "",
-                                        fecha_lanzamiento: "",
-                                        generos: [],
-                                        canciones: [],
-                                    })
-                                }
-                            >
-                                Agregar Disco
-                            </button>
-                            {artist.discos.length > 0 && (
-                                <button
-                                    type="button"
-                                    className="remove-button"
-                                    onClick={() => handleRemoveField("discos", artist.discos.length - 1)}
-                                >
-                                    Quitar Disco
-                                </button>
-                            )}
-                        </div>
+                        <button
+                            type="button"
+                            className="add-disco-button"
+                            onClick={() =>
+                                handleAddField("discos", {
+                                    titulo: "",
+                                    fecha_lanzamiento: "",
+                                    canciones: [],
+                                })
+                            }
+                        >
+                            Agregar Disco
+                        </button>
                     )}
-
-
 
                     <div>
                         {isEditing ? (
@@ -634,8 +640,9 @@ const AdminArtistDetail = () => {
                             </button>
                         )}
                     </div>
-
                 </form>
+
+
             </div>
             {showModal && (
                 <Modal>
