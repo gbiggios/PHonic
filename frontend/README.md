@@ -1,3 +1,7 @@
+<!-- Para iniciar el proyecto recodar instalar las dependencias en la carpeta de frontend
+ejecutan npm i (se crea la carpeta node_modules)
+luego puede iniciar el frontend con npm start -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

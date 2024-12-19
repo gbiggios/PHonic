@@ -1,0 +1,108 @@
+
+.create-genre-container {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.form-wrapper {
+    background: linear-gradient(135deg, rgb(3, 54, 3), #00f);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px 5px rgba(0, 255, 255, 0.8);
+    margin: 2rem;
+    width: 90%;
+
+}
+
+.form-title {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #f0f;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.genre-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todo a la izquierda */
+    margin-bottom: 1.5rem;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ffff; /* Color cian llamativo */
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00cccc; /* Efecto neón */
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+label:hover {
+    color: #ff00ff; /* Cambia a rosa al pasar el cursor */
+    text-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff;
+}
+
+.input-field {
+    background: #111; /* Fondo oscuro */
+    color: #fff;
+    border: 1px solid #00ffff;
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    width: 100%;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+
+.input-field:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff;
+}
+
+.submit-button {
+    background: #ff00ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 10px #ff0, 0 0 20px #f0f;
+}
+
+.submit-button:hover {
+    background: #0f0;
+    color: #000;
+    box-shadow: 0 0 15px #0f0;
+}
+
+.create-genre-container button:hover {
+    transform: scale(1.1);
+}
+
+.create-genre-container input:hover {
+    border-color: #f0f;
+}
+
+.create-genre-container input:focus {
+    box-shadow: 0 0 10px #0ff;
+}
