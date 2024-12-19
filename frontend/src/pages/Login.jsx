@@ -7,60 +7,57 @@ import Footer from "../components/Footer";
 import Spinner from "../components/Spinner";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState(""); // Cambiado de email a username
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Limpiar mensajes previos
     setError("");
     setSuccess("");
-
-    // Validaciones
-    if (!validateEmail(email)) {
-      setError("Por favor, ingresa un correo válido (correo@correo.com).");
+  
+    if (!username.trim()) {
+      setError("Por favor, ingresa tu nombre de usuario.");
       return;
     }
     if (password.trim().length < 6) {
       setError("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
-
-    setLoading(true); 
-
+  
+    setLoading(true);
+  
     try {
-      const response = await api.post("api/login/", { email, password });
-      setSuccess("Inicio de sesión exitoso. Bienvenido.");
-      console.log("Respuesta del servidor:", response.data);
-      setLoading(false); 
+      const response = await api.post("api/login/", { username, password });
+      setLoading(false);
+      const redirectUrl = response.data.redirect_url;
+  
+      // Depuración
+      console.log("Redirect URL recibida:", redirectUrl);
+  
+      window.location.href = redirectUrl; // Redirige a la URL proporcionada
     } catch (err) {
       console.error("Error al iniciar sesión:", err);
       setError(err.response?.data?.error || "Error al iniciar sesión. Intenta de nuevo.");
-      setLoading(false); 
+      setLoading(false);
     }
   };
+  
 
   return (
     <>
       <Slider />
       <div className="login-container">
-        {loading && <Spinner />} 
+        {loading && <Spinner />}
         <form onSubmit={handleSubmit} className="login-form">
           <h2>Iniciar Sesión</h2>
           <input
-            type="email"
-            placeholder="Correo electrónico"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text" // Cambiado de email a text
+            placeholder="Nombre de usuario"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} // Cambiado a username
             required
           />
           <input
