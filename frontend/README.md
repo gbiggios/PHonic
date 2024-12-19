@@ -2,6 +2,10 @@
 ejecutan npm i (se crea la carpeta node_modules)
 luego puede iniciar el frontend con npm start -->
 
+<!-- deben instalar en la carpeta del frontend 
+
+npm install js-cookie -->
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -331,3 +331,21 @@ select::-webkit-scrollbar-thumb:hover {
 select::-webkit-scrollbar-track {
   background-color: #121212; /* Fondo oscuro */
 }
+
+/* Personalizar el scrollbar del textarea */
+textarea::-webkit-scrollbar {
+  width: 5px; /* Grosor del scroll */
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #00ffff; /* Neon cyan */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #00cccc; /* Color más intenso al pasar el mouse */
+}
+
+textarea::-webkit-scrollbar-track {
+  background-color: #121212; /* Fondo oscuro */
+}
