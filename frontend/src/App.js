@@ -10,6 +10,7 @@ import UserHeader from "./components/UserHeader"; // Agregado
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Artist_List from "./pages/Artist_List"
 
 // Páginas de Usuario
 import UserHome from "./pages/UserHome";
@@ -53,7 +54,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path="/Artist_List" element={<Artist_List />} />
+          Artist_List
           {/* Usuario */}
           <Route path="/user-home" element={<UserHome />} />
 
