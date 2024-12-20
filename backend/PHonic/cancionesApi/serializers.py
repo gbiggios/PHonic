@@ -1,11 +1,26 @@
 from rest_framework import serializers
 from canciones.models import Cancion
+from discos.models import Disco
+from artistas.models import Artista
 
+# Serializer para Artista
+class ArtistaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artista
+        fields = ['id', 'nombre', 'nombre_artistico']
+
+# Serializer para Disco
+class DiscoSerializer(serializers.ModelSerializer):
+    artistas = ArtistaSerializer(many=True)
+
+    class Meta:
+        model = Disco
+        fields = ['id', 'titulo', 'fecha_lanzamiento', 'artistas']
+
+# Serializer para Cancion
 class CancionSerializer(serializers.ModelSerializer):
-    """
-    Serializador para el modelo Cancion.
-    Convierte instancias del modelo Cancion en datos JSON y viceversa.
-    """
+    disco_detalle = DiscoSerializer(source='disco', read_only=True)
+
     class Meta:
         model = Cancion
-        fields = '__all__'  # Incluye todos los campos del modelo Cancion
+        fields = ['id', 'titulo', 'duracion', 'fecha_lanzamiento', 'disco', 'disco_detalle']

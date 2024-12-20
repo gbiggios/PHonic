@@ -29,6 +29,7 @@ import AdminCreateGenre from "./pages/AdminCreateGenre";
 import AdminArtist from "./pages/AdminArtist";
 import AdminArtistsList from "./pages/AdminArtistsList";
 import AdminArtistDetail from "./pages/AdminArtistDetail";
+import SongsPage from "./pages/SongsPage";
 
 // Componente Layout para condicionar encabezado
 function Layout({ children }) {
@@ -74,6 +75,7 @@ function App() {
           <Route path="/user-artist_information/:id" element={<UserArtistInformation />} />
           <Route path="/user-albums" element={<UserAlbums />} />
           <Route path="/user-profile" element={<Profile />} />
+          <Route path="/songs" element={<SongsPage />} />
 
           
           {/* Administrador */}
