@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Artist_List from "./pages/Artist_List"
+import Artist_Information from "./pages/Artist_Information";
 
 // Páginas de Usuario
 import UserHome from "./pages/UserHome";
@@ -54,8 +55,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/Artist_List" element={<Artist_List />} />
-          Artist_List
+          <Route path="/artist-list" element={<Artist_List />} />
+          <Route path="/artist_information/:id" element={<Artist_Information />} />
+
+          
           {/* Usuario */}
           <Route path="/user-home" element={<UserHome />} />
 
