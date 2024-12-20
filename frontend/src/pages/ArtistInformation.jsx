@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../styles/Artist_Information.css";
-import Header from "../components/Header";
+import Slider from "../components/Slider";
 import Footer from "../components/Footer";
 import api from "../utils/api";
 
@@ -43,11 +43,11 @@ const ArtistInformation = () => {
 
         // Actualizar estado con datos completos
         setArtist({
-            ...artistData,
-            discos: updatedDiscos || [],
-            redesSociales: redesData || [],
+          ...artistData,
+          discos: updatedDiscos || [],
+          redesSociales: redesData || [],
         });
-        
+
       } catch (error) {
         console.error("Error al cargar los datos del artista:", error);
         setArtist(null); // Manejo de errores
@@ -65,7 +65,7 @@ const ArtistInformation = () => {
 
   return (
     <>
-      <Header />
+      <Slider />
       <div className="artist-container">
         {/* Nombre y biografía */}
         <h1 className="artist-name">{artist.nombre_artistico}</h1>
@@ -80,31 +80,42 @@ const ArtistInformation = () => {
           <p className="artist-bio">{artist.biografia}</p>
         </section>
 
+        {/* Géneros */}
+        <section className="artist-section">
+          <h2>Géneros</h2>
+          <ul className="genre-container">
+            {artist.discos.flatMap((album) => album.generos).map((genre, index) => (
+              <li key={index} className="genre-item">{genre.nombre}</li>
+            ))}
+          </ul>
+        </section>
+
         {/* Discos y Canciones */}
         <section className="artist-section">
           <h2>Discos y Canciones</h2>
           <div className="album-container">
             {artist.discos.map((album, index) => (
               <div key={index} className="album-item">
-                <h3>{album.titulo}</h3>
-                <p>
-                  <strong>Géneros:</strong>{" "}
-                  {album.generos.map((genre) => genre.nombre).join(", ")}
-                </p>
-                <h4>Canciones:</h4>
-                <ul className="song-list">
-                  {album.canciones.map((song, i) => (
-                    <li key={i} className="song-item">
-                      <p><strong>Título:</strong> {song.titulo}</p>
-                      <p><strong>Duración:</strong> {song.duracion}</p>
-                      <p><strong>Fecha de Lanzamiento:</strong> {song.fecha_lanzamiento}</p>
-                    </li>
-                  ))}
-                </ul>
+                {/* Título del Disco */}
+                <h3 className="album-title">{album.titulo}</h3>
+                {/* Contenedor de Canciones */}
+                <div className="songs-container">
+                  <h4>Canciones:</h4>
+                  <ul className="song-list">
+                    {album.canciones.map((song, i) => (
+                      <li key={i} className="song-item">
+                        <p><strong>Título:</strong> {song.titulo}</p>
+                        <p><strong>Duración:</strong> {song.duracion}</p>
+                        <p><strong>Fecha de Lanzamiento:</strong> {song.fecha_lanzamiento}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             ))}
           </div>
         </section>
+
 
         {/* Redes Sociales */}
         <section className="artist-section">

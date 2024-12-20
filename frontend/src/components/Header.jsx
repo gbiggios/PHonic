@@ -14,6 +14,18 @@ const Header = () => {
     navigate("/login"); 
   };
 
+  const handleArtistasClick = () => {
+    navigate("/artist-list"); 
+  };
+
+  const handleContactoClick = () => {
+    navigate("/contacto"); 
+  };
+
+  const handleÁlbumesClick = () => {
+    navigate("/Albums"); 
+  };
+
   return (
     <header>
       <div className="logo-container" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
@@ -22,9 +34,9 @@ const Header = () => {
       <nav>
         <ul>
           <li onClick={handleInicioClick}>Login</li>
-          <li>Artistas</li>
-          <li>Álbumes</li>
-          <li>Contacto</li>
+          <li onClick={handleArtistasClick}>Artistas</li>
+          <li onClick={handleÁlbumesClick}>Albums</li>
+          <li onClick={handleContactoClick}>Contacto</li>
         </ul>
       </nav>
     </header>

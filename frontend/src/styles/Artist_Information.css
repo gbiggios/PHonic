@@ -1,96 +1,192 @@
-/* Contenedor principal */
+/* Contenedor Principal */
 .artist-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    background-color: #111;
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 255, 255, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Animación de Fade */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
-  
-  /* Título principal */
-  .artist-name {
-    text-align: center;
-    font-size: 2.8rem;
-    color: #00f2ff;
-    text-shadow: 0 0 10px #00f2ff;
-    margin-bottom: 20px;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .artist-real-name,
-  .artist-birthdate {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #ddd;
-    margin-bottom: 20px;
+}
+
+/* Título Principal */
+.artist-container .artist-name {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #00ffff;
+  text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffee;
+  margin-bottom: 20px;
+  animation: glow 1.5s infinite;
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffee;
   }
-  
-  /* Secciones generales */
-  .artist-section {
-    margin-bottom: 40px;
-    text-align: center;
+  50% {
+    text-shadow: 0 0 30px #00ffaa, 0 0 40px #00ffaa;
   }
-  
-  .artist-section h2 {
-    font-size: 2rem;
-    color: #00f2ff;
-    text-shadow: 0 0 5px #00f2ff;
-    margin-bottom: 20px;
-  }
-  
-  /* Contenedor de discos */
-  .album-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  /* Tarjeta de discos */
-  .album-item {
-    background-color: #222;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-    width: 300px;
-    text-align: center;
-  }
-  
-  .album-item h3 {
-    font-size: 1.5rem;
-    color: #00f2ff;
-    margin-bottom: 10px;
-  }
-  
-  .album-item p {
-    font-size: 1rem;
-    color: #ccc;
-    margin-bottom: 5px;
-  }
-  
-  .album-item strong {
-    color: #00f2ff;
-  }
-  
-  /* Lista de canciones */
-  .song-list {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-  }
-  
-  /* Canciones individuales */
-  .song-item {
-    background-color: #333;
-    padding: 10px;
-    margin-bottom: 15px; /* Añadimos espacio entre canciones */
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.2);
-  }
-  
-  .song-item p {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin: 5px 0;
-  }
+}
+
+.artist-container .artist-real-name,
+.artist-container .artist-birthdate {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* Secciones Generales */
+.artist-container .artist-section {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.artist-container .artist-section h2 {
+  font-size: 2.5rem;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ff00ff;
+  padding-bottom: 10px;
+}
+
+/* Sección de Géneros */
+.artist-container .genre-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  background: linear-gradient(135deg, #222, #333);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+}
+
+.artist-container .genre-item {
+  background: rgba(0, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #00ffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ffff;
+  box-shadow: 0 2px 5px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.artist-container .genre-item:hover {
+  background: rgba(0, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Tarjeta de Disco */
+.artist-container .album-item {
+  display: flex;
+  flex-direction: column; /* Asegurar que los elementos estén en columna */
+  background: linear-gradient(135deg, #2e2e2e, #3a3a3a);
+  padding: 20px;
+  border-radius: 15px;
+  width: 350px;
+  max-width: 100%;
+  color: #fff;
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-container .album-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 25px rgba(255, 105, 180, 0.8);
+}
+
+/* Título del Disco */
+.artist-container .album-title {
+  font-size: 2rem;
+  color: #ff4500;
+  text-align: center;
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px #ff4500;
+  border-bottom: 2px solid rgba(255, 69, 0, 0.5);
+  padding-bottom: 10px;
+}
+
+/* Contenedor de Canciones */
+.artist-container .songs-container {
+  margin-top: 15px;
+  background: rgba(0, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.artist-container .songs-container h4 {
+  font-size: 1.5rem;
+  color: #00ffff;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+/* Lista de Canciones */
+.artist-container .song-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.artist-container .song-item {
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.artist-container .song-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.artist-container .song-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.artist-container .song-item p strong {
+  color: #00ffff;
+}
+
+
+/* Redes Sociales */
+.artist-container .artist-section ul li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.artist-container .artist-section ul li a {
+  color: #00ffff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.artist-container .artist-section ul li a:hover {
+  color: #ff4500;
+  transform: scale(1.1);
+}

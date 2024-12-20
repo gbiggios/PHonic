@@ -10,11 +10,18 @@ import UserHeader from "./components/UserHeader"; // Agregado
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Artist_List from "./pages/Artist_List"
-import Artist_Information from "./pages/Artist_Information";
+import ArtistList from "./pages/ArtistList"
+import ArtistInformation from "./pages/ArtistInformation";
+import ContactForm from "./pages/ContactForm";
+import Albums from "./pages/Albums";
 
 // Páginas de Usuario
 import UserHome from "./pages/UserHome";
+import UserArtistList from "./pages/UserArtistList"
+import UserContact from "./pages/UserContact"
+import UserArtistInformation from "./pages/UserArtistInformation"
+import UserAlbums from "./pages/UserAlbums"
+import Profile from "./pages/Profile"
 
 // Páginas Administrador
 import AdminHome from "./pages/AdminHome";
@@ -55,13 +62,20 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/artist-list" element={<Artist_List />} />
-          <Route path="/artist_information/:id" element={<Artist_Information />} />
-
+          <Route path="/artist-list" element={<ArtistList />} />
+          <Route path="/artist_information/:id" element={<ArtistInformation />} />
+          <Route path="/contacto" element={<ContactForm />} />
+          <Route path="/albums" element={<Albums />} />
           
           {/* Usuario */}
           <Route path="/user-home" element={<UserHome />} />
+          <Route path="/user-artist-list" element={<UserArtistList />} />
+          <Route path="/user-contacto" element={<UserContact />} />
+          <Route path="/user-artist_information/:id" element={<UserArtistInformation />} />
+          <Route path="/user-albums" element={<UserAlbums />} />
+          <Route path="/user-profile" element={<Profile />} />
 
+          
           {/* Administrador */}
           <Route path="/admin-home" element={<AdminHome />} />
           <Route path="/admin-create-genre" element={<AdminCreateGenre />} />

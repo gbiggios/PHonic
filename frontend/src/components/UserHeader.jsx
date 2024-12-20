@@ -23,7 +23,19 @@ const UserHeader = () => {
   };
 
   const handleProfileClick = () => {
-    navigate("/user-home"); // Ruta para el perfil del usuario
+    navigate("/user-profile"); // Ruta para el perfil del usuario
+  };
+
+  const handleArtistsClick = () => {
+    navigate("/user-artist-list"); // Redirige a la lista de artistas
+  };
+
+  const handleAlbumsClick = () => {
+    navigate("/user-albums"); // Redirige a la página de álbumes
+  };
+
+  const handleContactClick = () => {
+    navigate("/user-contacto"); // Redirige a la página de contacto
   };
 
   return (
@@ -34,9 +46,9 @@ const UserHeader = () => {
       <nav>
         <ul>
           <li onClick={handleProfileClick}>Mi Perfil</li>
-          <li>Artistas</li>
-          <li>Álbumes</li>
-          <li>Contacto</li>
+          <li onClick={handleArtistsClick}>Artistas</li>
+          <li onClick={handleAlbumsClick}>Álbumes</li>
+          <li onClick={handleContactClick}>Contacto</li>
           <li onClick={handleLogoutClick}>Cerrar Sesión</li>
         </ul>
       </nav>
