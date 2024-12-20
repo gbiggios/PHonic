@@ -1,0 +1,50 @@
+/* Contenedor principal */
+.albums {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    background-color: #1c1c1c;
+  }
+  
+  .album-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background: linear-gradient(145deg, #111, #222);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3), 0 0 15px rgba(255, 0, 255, 0.3);
+  }
+  
+  .album-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.5);
+  }
+  
+  .album-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .album-overlay {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .album-name {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  

@@ -1,0 +1,77 @@
+/* Contenedor principal */
+.profile-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #1c1c1c;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 10px rgba(255, 0, 255, 0.5);
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  /* Título del formulario */
+  .profile-form-title {
+    font-size: 2rem;
+    text-align: center;
+    color: #00f2ff;
+    text-shadow: 0 0 10px #00f2ff;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario */
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Grupo del formulario */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+    color: #ddd;
+    margin-bottom: 5px;
+  }
+  
+  /* Inputs y selects con el mismo tamaño */
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    font-size: 1rem;
+    color: #fff;
+    background: #121212;
+    border: 1px solid #00f2ff;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s ease-in-out;
+    width: 100%; /* Asegura que todos los inputs ocupen el mismo ancho */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border: 1px solid #ff00ff;
+  }
+  
+  /* Botón Guardar */
+  .save-button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(145deg, #00f2ff, #ff00ff);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .save-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px #00f2ff, 0 0 10px #ff00ff;
+  }
