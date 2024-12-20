@@ -99,3 +99,12 @@ form button:hover {
 .table tr:hover {
     background-color: #333;
 }
+
+.add-song-form h2 {
+    font-size: 1.8rem;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
