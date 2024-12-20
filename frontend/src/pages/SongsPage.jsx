@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/SongsPage.css";
 import AddSongForm from "../components/AddSongForm";
 import EditSongModal from "../components/EditSongModal";
+import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 const SongsPage = () => {
   const [songs, setSongs] = useState([]);
@@ -94,6 +96,8 @@ const SongsPage = () => {
   };
 
   return (
+    <>
+      <Slider />
     <div className="songs-page">
       <h1 className="page-title">Gestión de Canciones</h1>
       <AddSongForm onSongAdded={handleSongAdded} />
@@ -180,6 +184,8 @@ const SongsPage = () => {
         />
       )}
     </div>
+    <Footer />
+    </>
   );
 };
 
