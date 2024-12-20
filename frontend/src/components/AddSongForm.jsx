@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import api from "../utils/api";
 import "../styles/AddSongForm.css";
 
 const AddSongForm = ({ onSongAdded }) => {
@@ -13,9 +14,8 @@ const AddSongForm = ({ onSongAdded }) => {
   useEffect(() => {
     const fetchDiscos = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/discos/");
-        const data = await response.json();
-        setDiscos(data);
+        const response = await api.get("/api/discos/");
+        setDiscos(response.data);
       } catch (error) {
         console.error("Error fetching discos:", error);
       }
@@ -24,39 +24,53 @@ const AddSongForm = ({ onSongAdded }) => {
     fetchDiscos();
   }, []);
 
+  const handleDurationChange = (e) => {
+    let value = e.target.value.replace(/[^0-9]/g, ""); // Solo números
+    if (value.length > 4) value = value.slice(0, 4); // Máximo de 4 dígitos
+
+    // Formatear a MM:SS
+    if (value.length > 2) {
+      value = `${value.slice(0, 2)}:${value.slice(2)}`;
+    }
+
+    setDuracion(value);
+  };
+
+  const formatDurationForBackend = (duration) => {
+    const [minutes, seconds] = duration.split(":").map((part) => part.padStart(2, "0"));
+    return `00:${minutes}:${seconds}`; // Asegúrate de que el formato sea HH:MM:SS
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
+    const formattedDuration = formatDurationForBackend(duracion);
+  
     const songData = {
       titulo,
-      duracion,
+      duracion: formattedDuration,
       fecha_lanzamiento: fechaLanzamiento,
       disco,
     };
-
+  
+    console.log("Datos enviados al backend:", songData);
+  
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/canciones/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(songData),
-      });
-
-      if (response.ok) {
-        const newSong = await response.json();
-        onSongAdded(newSong); // Notify parent component about the new song
-        resetForm();
-      } else {
-        console.error("Error adding song");
+      const response = await api.post("/api/canciones/", songData);
+      if (onSongAdded) {
+        onSongAdded(response.data); // Notifica al componente padre que se ha agregado una nueva canción
       }
+      resetForm();
     } catch (error) {
-      console.error("Error adding song:", error);
+      console.error("Error adding song:", error.response?.data || error);
     } finally {
       setLoading(false);
     }
   };
+  
+  
 
   const resetForm = () => {
     setTitulo("");
@@ -81,9 +95,9 @@ const AddSongForm = ({ onSongAdded }) => {
         Duración:
         <input
           type="text"
-          placeholder="hh:mm:ss"
+          placeholder="MM:SS"
           value={duracion}
-          onChange={(e) => setDuracion(e.target.value)}
+          onChange={handleDurationChange}
           required
         />
       </label>
