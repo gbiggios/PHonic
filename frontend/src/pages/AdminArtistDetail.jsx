@@ -303,42 +303,26 @@ const AdminArtistDetail = () => {
     };
 
 
-
-
     const handleDelete = async () => {
+        console.log("Intentando eliminar artista...");
         setLoading(true);
 
         try {
-            // Eliminar relación entre el artista y sus géneros musicales
-            console.log(`Eliminando relaciones de géneros del artista con ID: ${id}`);
-            await api.delete(`/api/artistas/${id}/generos/`);
-
-            // Eliminar todas las redes sociales relacionadas
-            for (const red of artist.redesSociales) {
-                console.log(`Eliminando red social con ID: ${red.id}`);
-                await api.delete(`/api/redes_sociales/${red.id}`);
-            }
-
-            // Eliminar todas las canciones de los discos relacionados
-            for (const disco of artist.discos) {
-                for (const cancion of disco.canciones) {
-                    console.log(`Eliminando canción con ID: ${cancion.id}`);
-                    await api.delete(`/api/canciones/${cancion.id}`);
-                }
-
-                // Eliminar el disco
-                console.log(`Eliminando disco con ID: ${disco.id}`);
-                await api.delete(`/api/discos/${disco.id}`);
-            }
-
-            // Finalmente, eliminar el artista
+            // Eliminar al artista directamente
             console.log(`Eliminando artista con ID: ${id}`);
-            await api.delete(`/api/artistas/${id}`);
+            await api.delete(`/api/artistas/${id}/`, {
+                params: {
+                    'Content-Type': 'application/json', // Incluye el parámetro en la URL
+                },
+                headers: {
+                    'Content-Type': 'application/json', // Asegura que el encabezado también esté presente
+                },
+            });
 
-            alert("Artista y todos sus datos relacionados fueron eliminados correctamente.");
-            navigate('/admin-artist-list');
+            alert("El artista fue eliminado correctamente.");
+            navigate('/admin-artist-list'); // Redirige después de eliminar
         } catch (error) {
-            console.error('Error eliminando el artista y sus datos relacionados:', error);
+            console.error("Error eliminando el artista:", error.response?.data || error);
             alert("Ocurrió un error al intentar eliminar el artista. Por favor, intenta nuevamente.");
         } finally {
             setLoading(false);
@@ -347,16 +331,18 @@ const AdminArtistDetail = () => {
 
 
 
-    
+
+
+
 
     return (
         <>
             <Slider />
             {loading && (
-            <div className="spinner-overlay">
-                <Spinner />
-            </div>
-        )}
+                <div className="spinner-overlay">
+                    <Spinner />
+                </div>
+            )}
             <div className="admin-artist-container">
                 <h1 className="artist-detail-title">
                     {artist.nombre_artistico || 'Información no disponible'}
@@ -588,15 +574,15 @@ const AdminArtistDetail = () => {
 
                                 {/* Botón para Quitar Disco */}
                                 {isEditing && (
-                                     <div className="remove-disco-container">
-                                     <button
-                                         type="button"
-                                         className="remove-disco-button"
-                                         onClick={() => handleRemoveField("discos", index)}
-                                     >
-                                         Quitar Disco
-                                     </button>
-                                 </div>
+                                    <div className="remove-disco-container">
+                                        <button
+                                            type="button"
+                                            className="remove-disco-button"
+                                            onClick={() => handleRemoveField("discos", index)}
+                                        >
+                                            Quitar Disco
+                                        </button>
+                                    </div>
                                 )}
                             </div>
                         ))
@@ -642,19 +628,40 @@ const AdminArtistDetail = () => {
                     </div>
                 </form>
 
+                {/* Botón de eliminar artista */}
+                <div className="delete-artist-container">
+                    <button
+                        type="button"
+                        className="delete-artist-button"
+                        onClick={() => {
+                            console.log("Botón de eliminar presionado");
+                            setShowModal(true);
+                        }}
+                    >
+                        Eliminar Artista
+                    </button>
+
+                </div>
 
             </div>
+            {/* Uso del Modal */}
             {showModal && (
-                <Modal>
-                    <p>¿Está seguro de que desea eliminar este artista?</p>
-                    <button onClick={handleDelete} className="modal-button">
-                        Sí, eliminar
-                    </button>
-                    <button onClick={() => setShowModal(false)} className="modal-button cancel">
-                        Cancelar
-                    </button>
+                <Modal
+                    isOpen={showModal}
+                    title="Confirmar eliminación"
+                    onClose={() => setShowModal(false)}
+                >
+                    <p>¿Está seguro de que desea eliminar este artista? Esta acción no se puede deshacer.</p>
+                    <div className="modal-actions">
+                        <button onClick={handleDelete} className="modal-close-button">
+                            Sí, eliminar
+                        </button>
+                        
+                    </div>
                 </Modal>
             )}
+
+
             <Footer />
         </>
     );
