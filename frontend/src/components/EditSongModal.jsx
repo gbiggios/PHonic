@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import API from "../utils/api"; // Importamos la configuración centralizada de Axios
+import "../styles/EditSongModal.css"; // Asegúrate de que el estilo del modal esté correcto
 
 const EditSongModal = ({ song, onClose, onSongUpdated }) => {
   const [formData, setFormData] = useState({
@@ -7,8 +9,23 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
     fecha_lanzamiento: song.fecha_lanzamiento,
     disco: song.disco, // Usar el ID del disco
   });
-
+  const [discos, setDiscos] = useState([]);
   const [errorDetails, setErrorDetails] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch discos para el dropdown
+  useEffect(() => {
+    const fetchDiscos = async () => {
+      try {
+        const { data } = await API.get("/discos/");
+        setDiscos(data);
+      } catch (error) {
+        console.error("Error fetching discos:", error);
+      }
+    };
+
+    fetchDiscos();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,25 +36,19 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
   };
 
   const handleSave = async () => {
+    setLoading(true);
+    setErrorDetails(null);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/canciones/${song.id}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        setErrorDetails(errorData); // Muestra detalles del error si ocurre
-        throw new Error("Error updating song");
-      }
-
-      const updatedSong = await response.json();
-      onSongUpdated(updatedSong);
+      const { data } = await API.put(`/canciones/${song.id}/`, formData);
+      onSongUpdated(data); // Actualiza la canción en el estado del padre
+      onClose(); // Cierra el modal
     } catch (error) {
+      if (error.response) {
+        setErrorDetails(error.response.data); // Muestra errores del servidor
+      }
       console.error("Error updating song:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,6 +63,7 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
             name="titulo"
             value={formData.titulo}
             onChange={handleInputChange}
+            required
           />
         </label>
         <label>
@@ -62,6 +74,7 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
             value={formData.duracion}
             onChange={handleInputChange}
             placeholder="HH:MM:SS"
+            required
           />
         </label>
         <label>
@@ -71,6 +84,7 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
             name="fecha_lanzamiento"
             value={formData.fecha_lanzamiento}
             onChange={handleInputChange}
+            required
           />
         </label>
         <label>
@@ -79,12 +93,16 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
             name="disco"
             value={formData.disco}
             onChange={handleInputChange}
+            required
           >
-            {/* Este dropdown debe ser rellenado dinámicamente */}
             <option value="" disabled>
               Seleccione un disco
             </option>
-            {/* Opciones dinámicas de discos */}
+            {discos.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.titulo}
+              </option>
+            ))}
           </select>
         </label>
         {errorDetails && (
@@ -94,7 +112,9 @@ const EditSongModal = ({ song, onClose, onSongUpdated }) => {
           </div>
         )}
         <div className="modal-actions">
-          <button onClick={handleSave}>Guardar</button>
+          <button onClick={handleSave} disabled={loading}>
+            {loading ? "Guardando..." : "Guardar"}
+          </button>
           <button onClick={onClose}>Cancelar</button>
         </div>
       </div>

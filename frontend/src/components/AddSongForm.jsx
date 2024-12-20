@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/AddSongForm.css";
+import API from "../utils/api"; // Importamos la configuración centralizada de Axios
 
 const AddSongForm = ({ onSongAdded }) => {
   const [titulo, setTitulo] = useState("");
@@ -7,14 +8,14 @@ const AddSongForm = ({ onSongAdded }) => {
   const [fechaLanzamiento, setFechaLanzamiento] = useState("");
   const [disco, setDisco] = useState("");
   const [discos, setDiscos] = useState([]);
+  const [artistas, setArtistas] = useState([]); // Almacena los artistas del disco seleccionado
   const [loading, setLoading] = useState(false);
 
-  // Fetch discos from the backend
+  // Fetch discos desde el backend
   useEffect(() => {
     const fetchDiscos = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/discos/");
-        const data = await response.json();
+        const { data } = await API.get("/discos/");
         setDiscos(data);
       } catch (error) {
         console.error("Error fetching discos:", error);
@@ -23,6 +24,20 @@ const AddSongForm = ({ onSongAdded }) => {
 
     fetchDiscos();
   }, []);
+
+  // Maneja la selección del disco y busca los artistas
+  const handleDiscoChange = (e) => {
+    const selectedDiscoId = e.target.value;
+    setDisco(selectedDiscoId);
+
+    // Busca detalles del disco seleccionado para obtener los artistas
+    const selectedDisco = discos.find((d) => d.id === parseInt(selectedDiscoId, 10));
+    if (selectedDisco) {
+      setArtistas(selectedDisco.artistas || []);
+    } else {
+      setArtistas([]); // Limpia los artistas si no hay disco seleccionado
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,21 +51,9 @@ const AddSongForm = ({ onSongAdded }) => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/canciones/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(songData),
-      });
-
-      if (response.ok) {
-        const newSong = await response.json();
-        onSongAdded(newSong); // Notify parent component about the new song
-        resetForm();
-      } else {
-        console.error("Error adding song");
-      }
+      const { data } = await API.post("/canciones/", songData);
+      onSongAdded(data); // Notifica al componente padre sobre la nueva canción
+      resetForm();
     } catch (error) {
       console.error("Error adding song:", error);
     } finally {
@@ -63,6 +66,7 @@ const AddSongForm = ({ onSongAdded }) => {
     setDuracion("");
     setFechaLanzamiento("");
     setDisco("");
+    setArtistas([]);
   };
 
   return (
@@ -98,11 +102,7 @@ const AddSongForm = ({ onSongAdded }) => {
       </label>
       <label>
         Disco:
-        <select
-          value={disco}
-          onChange={(e) => setDisco(e.target.value)}
-          required
-        >
+        <select value={disco} onChange={handleDiscoChange} required>
           <option value="">Selecciona un disco</option>
           {discos.map((d) => (
             <option key={d.id} value={d.id}>
@@ -111,6 +111,18 @@ const AddSongForm = ({ onSongAdded }) => {
           ))}
         </select>
       </label>
+      {artistas.length > 0 && (
+        <div className="artistas">
+          <h4>Artistas del Disco:</h4>
+          <ul>
+            {artistas.map((artista) => (
+              <li key={artista.id}>
+                {artista.nombre} ({artista.nombre_artistico})
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <button type="submit" disabled={loading}>
         {loading ? "Guardando..." : "Agregar Canción"}
       </button>

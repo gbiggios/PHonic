@@ -84,6 +84,7 @@ function App() {
           <Route path="/admin-artist" element={<AdminArtist />} />
           <Route path="/admin-artist-list" element={<AdminArtistsList />} />
           <Route path="/admin-artist-detail/:id" element={<AdminArtistDetail />} />
+          <Route path="/admin-songs" element={<SongsPage />} />
         </Routes>
       </Layout>
     </Router>
