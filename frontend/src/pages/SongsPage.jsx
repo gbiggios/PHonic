@@ -144,8 +144,9 @@ const SongsPage = () => {
                 <td>{song.disco_detalle?.titulo || "Sin disco"}</td>
                 <td>{song.duracion}</td>
                 <td>
-                  <button onClick={() => setEditingSong(song)}>Editar</button>
+                  <button  className="edit-btn-renamed"  onClick={() => setEditingSong(song)}>Editar</button>
                   <button
+                   className="delete-btn-renamed" 
                     onClick={() =>
                       setSongs((prevSongs) =>
                         prevSongs.filter((s) => s.id !== song.id)
