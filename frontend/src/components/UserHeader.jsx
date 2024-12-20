@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 import logo from "../assets/logo.png";
 
-const AdminHeader = () => {
+const UserHeader = () => {
   const navigate = useNavigate();
 
   const handleLogoClick = () => {
@@ -22,28 +22,21 @@ const AdminHeader = () => {
     navigate("/login");
   };
 
-  const handleCreateArtistClick = () => {
-    navigate("/admin-artist"); // Ruta para crear artista
-  };
-
-  const handleCreateGenreClick = () => {
-    navigate("/admin-create-genre"); // Ruta para crear género musical
-  };
-
-  const handleViewArtistsClick = () => {
-    navigate("/admin-artist-list"); // Ruta para ver artistas
+  const handleProfileClick = () => {
+    navigate("/user-home"); // Ruta para el perfil del usuario
   };
 
   return (
     <header>
       <div className="logo-container" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
-        <img src={logo} alt="Admin Logo" />
+        <img src={logo} alt="User Logo" />
       </div>
       <nav>
         <ul>
-          <li onClick={handleCreateArtistClick}>Crear Artista</li>
-          <li onClick={handleViewArtistsClick}>Ver Artistas</li>
-          <li onClick={handleCreateGenreClick}>Crear Género</li>
+          <li onClick={handleProfileClick}>Mi Perfil</li>
+          <li>Artistas</li>
+          <li>Álbumes</li>
+          <li>Contacto</li>
           <li onClick={handleLogoutClick}>Cerrar Sesión</li>
         </ul>
       </nav>
@@ -51,4 +44,4 @@ const AdminHeader = () => {
   );
 };
 
-export default AdminHeader;
+export default UserHeader;

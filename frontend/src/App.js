@@ -4,11 +4,15 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 // Headers
 import Header from "./components/Header";
 import AdminHeader from "./components/AdminHeader";
+import UserHeader from "./components/UserHeader"; // Agregado
 
 // Páginas Generales
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
+// Páginas de Usuario
+import UserHome from "./pages/UserHome";
 
 // Páginas Administrador
 import AdminHome from "./pages/AdminHome";
@@ -20,11 +24,21 @@ import AdminArtistDetail from "./pages/AdminArtistDetail";
 // Componente Layout para condicionar encabezado
 function Layout({ children }) {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin-");
+
+  // Determinar el encabezado según el pathname
+  const getHeader = () => {
+    if (location.pathname.startsWith("/admin-")) {
+      return <AdminHeader />;
+    }
+    if (location.pathname.startsWith("/user-")) {
+      return <UserHeader />;
+    }
+    return <Header />;
+  };
 
   return (
     <>
-      {isAdminRoute ? <AdminHeader /> : <Header />}
+      {getHeader()}
       {children}
     </>
   );
@@ -40,16 +54,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
+          {/* Usuario */}
+          <Route path="/user-home" element={<UserHome />} />
+
           {/* Administrador */}
           <Route path="/admin-home" element={<AdminHome />} />
           <Route path="/admin-create-genre" element={<AdminCreateGenre />} />
           <Route path="/admin-artist" element={<AdminArtist />} />
           <Route path="/admin-artist-list" element={<AdminArtistsList />} />
           <Route path="/admin-artist-detail/:id" element={<AdminArtistDetail />} />
-
-
-
-          
         </Routes>
       </Layout>
     </Router>
