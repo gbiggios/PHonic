@@ -425,3 +425,31 @@ button:hover {
   transform: scale(1.05);
 }
 
+.delete-artist-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.delete-artist-button {
+  background-color: #ff4c4c; /* Rojo llamativo */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.delete-artist-button:hover {
+  background-color: #ff1a1a; /* Rojo más intenso */
+  transform: scale(1.1); /* Efecto de agrandamiento */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.delete-artist-button:active {
+  transform: scale(1); /* Remueve el agrandamiento al hacer clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
