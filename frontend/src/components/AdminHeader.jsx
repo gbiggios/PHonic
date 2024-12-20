@@ -34,6 +34,10 @@ const AdminHeader = () => {
     navigate("/admin-artist-list"); // Ruta para ver artistas
   };
 
+  const handleManageSongsClick = () => {
+    navigate("/admin-songs"); // Ruta para gestionar canciones
+  };
+
   return (
     <header>
       <div className="logo-container" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
@@ -44,6 +48,7 @@ const AdminHeader = () => {
           <li onClick={handleCreateArtistClick}>Crear Artista</li>
           <li onClick={handleViewArtistsClick}>Ver Artistas</li>
           <li onClick={handleCreateGenreClick}>Crear Género</li>
+          <li onClick={handleManageSongsClick}>Gestionar Canciones</li>
           <li onClick={handleLogoutClick}>Cerrar Sesión</li>
         </ul>
       </nav>

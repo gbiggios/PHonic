@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   const handleÁlbumesClick = () => {
-    navigate("/Albums"); 
+    navigate("/albums"); 
   };
 
   return (

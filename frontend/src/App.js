@@ -75,7 +75,7 @@ function App() {
           <Route path="/user-artist_information/:id" element={<UserArtistInformation />} />
           <Route path="/user-albums" element={<UserAlbums />} />
           <Route path="/user-profile" element={<Profile />} />
-          <Route path="/songs" element={<SongsPage />} />
+         
 
           
           {/* Administrador */}
@@ -84,6 +84,7 @@ function App() {
           <Route path="/admin-artist" element={<AdminArtist />} />
           <Route path="/admin-artist-list" element={<AdminArtistsList />} />
           <Route path="/admin-artist-detail/:id" element={<AdminArtistDetail />} />
+          <Route path="/admin-songs" element={<SongsPage />} />
         </Routes>
       </Layout>
     </Router>
