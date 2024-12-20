@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner";
 import "../styles/Home.css";
 import Banners from "../components/Banners";
 
-const Home = () => {
+const UserHome = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,4 +32,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default UserHome;
