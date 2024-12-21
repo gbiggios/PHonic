@@ -7,3 +7,4 @@ router.register(r'', CancionViewSet, basename='cancion')
 
 # Asignar las URLs generadas por el enrutador
 urlpatterns = router.urls
+
